@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Pickup Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .card {
+            width: 100%; /* Make cards fill the screen width on mobile */
+            max-width: 150px; /* Set maximum width */
+            height: 200px; /* Fixed height for cards */
+            background-color: #3498db;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+        /* Mobile-friendly styles */
+        @media screen and (max-width: 600px) {
+            .card {
+                width: 90%; /* Reduce card width on smaller screens */
+                max-width: 90%; /* Reduce max-width */
+                font-size: 16px; /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="card1"></div>
+    <div class="card" id="card2"></div>
+    <div class="card" id="card3"></div>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+
+        const surprises = [
+            "Beach",
+            "Better luck next time!",
+            "dairy milk"
+        ];
+
+        cards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                const randomIndex = Math.floor(Math.random() * surprises.length);
+                card.innerHTML = surprises[randomIndex];
+                card.style.backgroundColor = '#2ecc71';
+                card.style.transform = 'scale(1)';
+                card.style.cursor = 'not-allowed';
+                cards.forEach((c, i) => {
+                    if (i !== index) {
+                        c.style.pointerEvents = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
